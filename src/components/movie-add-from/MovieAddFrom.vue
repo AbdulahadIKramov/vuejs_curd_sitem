@@ -1,0 +1,69 @@
+<template>
+  <div class="movie_add_form">
+    <h3>Yangi kino qoshish</h3>
+    <form class="add_form d-flex" @submit.prevent>
+      <input
+        type="text"
+        class="form-control new_movie_label"
+        placeholder="Qnday kino?"
+        :value="name"
+        @input="name = $event.target.value"
+      />
+      <input
+        type="number"
+        class="form-control new_movie_label"
+        placeholder="Necha marotaba korilgan"
+        :value="viewers"
+        @input="viewers = $event.target.value"
+
+      />
+      <button class="btn btn-outline-dark" @click="addMovies">Qo'shish</button>
+    </form>
+  </div>
+</template>
+
+
+<script>
+export default {
+  data(){
+    return {
+      name: "",
+      viewers: ""
+    }
+  },
+  methods: {
+    changeHandlerName(e) {
+      console.log(e.target.value);
+    }
+  },
+  methods: {
+    addMovies() {
+
+      if(!this.name || !this.viewers) return
+      
+      const newMovies = {
+        name: this.name,
+        viewers: this.viewers,
+        favourite: false,
+        like: false,
+        id: Date.now()
+      }
+      this.$emit('createMovie', newMovies)
+      this.name = ""
+      this.viewers = ""
+    }
+  },
+  
+};
+</script>
+
+
+<style scoped>
+.movie_add_form {
+   margin-top: 2rem;
+   padding: 1.5rem;
+   background-color: #fcfaf5;
+   border-radius: 5px;
+   box-shadow: 15px 15px 15px #00000015;
+}
+</style>
