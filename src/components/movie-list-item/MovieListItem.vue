@@ -30,18 +30,19 @@
 </template>
 
 <script>
+
 export default {
-  props: {
-    movie: {
-      type: Object,
-      required: true,
+    props: {
+        movie: {
+            type: Object,
+            required: true,
+        },
     },
-  },
-  methods: {
-    onLike() {
-      this.$emit("onLike", this.movie.id);
+    methods: {
+        onLike() {
+            this.$emit("onLike", this.movie.id);
+        },
     },
-  },
 };
 </script>
 

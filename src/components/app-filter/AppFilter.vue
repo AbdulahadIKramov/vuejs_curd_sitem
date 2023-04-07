@@ -1,12 +1,14 @@
 <template>
   <div class="btn-group">
-   <button 
+   <PrimaryButton 
    v-for="b  in filterButtons"
    :key="b.name"
    class="btn"
    :class="[filterName === b.name ? 'btn-dark' : 'btn-outline-dark']"
    @click="filterHandler(b.name)"
-    >{{ b.title }}</button>
+    >
+    {{ b.title }}
+  </PrimaryButton>
 
     <!-- <button class="btn btn-dark" type="button" @click="filterHandler('all')">
       Barcha kinolar
@@ -28,42 +30,43 @@
   </div>
 </template>
 <script>
+
 export default {
-  props: {
-    updatedFilterHandler: {
-      type: Function,
-      required: true,
+    props: {
+        updatedFilterHandler: {
+            type: Function,
+            required: true,
+        },
+        filterName: {
+            type: String,
+            required: true,
+        },
     },
-    filterName: {
-      type: String,
-      required: true,
+    data() {
+        return {
+            filterButtons: [
+                {
+                    title: "Barcha kinolar",
+                    name: "all"
+                },
+                {
+                    title: "Mashxur kinolar",
+                    name: "popular"
+                },
+                {
+                    title: "Eng ko'p ko'rilgan kinolar",
+                    name: "mostViewers"
+                }
+            ],
+            filter: "all",
+        };
     },
-  },
-  data() {
-    return {
-      filterButtons: [
-         {
-            title: "Barcha kinolar",
-            name: "all"
-         },
-         {
-            title: "Mashxur kinolar",
-            name: "popular"
-         },
-         {
-            title: "Eng ko'p ko'rilgan kinolar",
-            name: "mostViewers"
-         }
-      ],
-      filter: "all",
-    };
-  },
-  methods: {
-    filterHandler(filter) {
-      this.filter = filter;
-      this.updatedFilterHandler(this.filter);
+    methods: {
+        filterHandler(filter) {
+            this.filter = filter;
+            this.updatedFilterHandler(this.filter);
+        },
     },
-  },
 };
 </script>
 
